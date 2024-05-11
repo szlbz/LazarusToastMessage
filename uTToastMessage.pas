@@ -373,6 +373,11 @@ begin
   //Çï·ç
   PanelBox.Height:=50;
   PanelBox.Width:=50+Text.Canvas.TextWidth(pText);
+  if PanelBox.Width>(Self.PanelBox.Parent as TForm).Width then
+  begin
+    PanelBox.Height:=50+Text.Height+20;
+    PanelBox.Width:=50+Text.Canvas.TextWidth(pText) div 2;
+  end;
   PanelBox.Left := Trunc(((Self.PanelBox.Parent as TForm).Width / 2) - (PanelBox.Width / 2));
   //Çï·ç
   if MessageType = tpSuccess then
