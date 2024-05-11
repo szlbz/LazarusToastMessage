@@ -339,13 +339,6 @@ begin
     (Parent as TForm).OnResize := @PanelBoxPosition;
 end;
 
-procedure TToastMessage.Toast(const Parent: TWinControl;
-  const MessageType: tpMode; pTitle, pText: string);
-begin
-  Self.SetParent(Parent);
-  Self.Toast(MessageType, pTitle, pText);
-end;
-
 class procedure TToastMessage.RealseMe;
 begin
   if Assigned(FToastMessage) then
@@ -365,14 +358,23 @@ begin
   FToastMessage.Toast(Parent, MessageType, pTitle, pText);
 end;
 
+procedure TToastMessage.Toast(const Parent: TWinControl;
+  const MessageType: tpMode; pTitle, pText: string);
+begin
+  Self.SetParent(Parent);
+  Self.Toast(MessageType, pTitle, pText);
+end;
+
 procedure TToastMessage.Toast(const MessageType : tpMode; pTitle, pText : string);
 begin
   Self.PanelBox.BringToFront; //Z轴方向放到最顶上； //pcplayer
   Title.Caption := pTitle;
   Text.Caption  := pText;
+  //秋风
   PanelBox.Height:=50;
   PanelBox.Width:=50+Text.Canvas.TextWidth(pText);
-
+  PanelBox.Left := Trunc(((Self.PanelBox.Parent as TForm).Width / 2) - (PanelBox.Width / 2));
+  //秋风
   if MessageType = tpSuccess then
     begin
       PanelLine.Color := SuccessColor;
