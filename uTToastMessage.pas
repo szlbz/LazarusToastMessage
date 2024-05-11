@@ -375,8 +375,10 @@ begin
   PanelBox.Width:=50+Text.Canvas.TextWidth(pText);
   if PanelBox.Width>(Self.PanelBox.Parent as TForm).Width then
   begin
-    PanelBox.Height:=50+Text.Height+20;
     PanelBox.Width:=50+Text.Canvas.TextWidth(pText) div 2;
+    if PanelBox.Width> (Self.PanelBox.Parent as TForm).Width then
+      PanelBox.Width:=(Self.PanelBox.Parent as TForm).Width -10;
+    PanelBox.Height:=50+Text.Height+20;
   end;
   PanelBox.Left := Trunc(((Self.PanelBox.Parent as TForm).Width / 2) - (PanelBox.Width / 2));
   //Çï·ç
