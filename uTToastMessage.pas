@@ -384,6 +384,7 @@ begin
     hs:= (PanelBox.Width-50) div tmp; //每行容纳n个字符
     hs:=utf8length(pText) div hs;  //n行
     PanelBox.Height:=Title.Height+Text.Height+(hs-2)*Text.Canvas.TextHeight(pText);
+    MinTop:=-47*(hs-1);
   end;
   PanelBox.Left := Trunc(((Self.PanelBox.Parent as TForm).Width / 2) - (PanelBox.Width / 2));
   //秋风
