@@ -25,6 +25,7 @@ interface
 
 uses
      System.NetEncoding,
+     lazutf8,
      Graphics,
      Controls,
      Extctrls,
@@ -366,6 +367,7 @@ begin
 end;
 
 procedure TToastMessage.Toast(const MessageType : tpMode; pTitle, pText : string);
+var hs,tmp:integer;
 begin
   Self.PanelBox.BringToFront; //Z轴方向放到最顶上； //pcplayer
   Title.Caption := pTitle;
@@ -373,12 +375,15 @@ begin
   //秋风
   PanelBox.Height:=50;
   PanelBox.Width:=50+Text.Canvas.TextWidth(pText);
+  tmp:=Text.Canvas.TextWidth('W');
   if PanelBox.Width>(Self.PanelBox.Parent as TForm).Width then
   begin
     PanelBox.Width:=50+Text.Canvas.TextWidth(pText) div 2;
     if PanelBox.Width> (Self.PanelBox.Parent as TForm).Width then
       PanelBox.Width:=(Self.PanelBox.Parent as TForm).Width -10;
-    PanelBox.Height:=50+Text.Height+20;
+    hs:= (PanelBox.Width-50) div tmp; //每行容纳n个字符
+    hs:=utf8length(pText) div hs;  //n行
+    PanelBox.Height:=Title.Height+Text.Height+(hs-2)*Text.Canvas.TextHeight(pText);
   end;
   PanelBox.Left := Trunc(((Self.PanelBox.Parent as TForm).Width / 2) - (PanelBox.Width / 2));
   //秋风
