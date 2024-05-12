@@ -70,7 +70,7 @@ type
       procedure Base64ToPng(imagepng:TImage;const StringBase64: string);
       var
         Timer : TTimer;
-
+        FormHeight  :integer;
         SuccessImage : string;
         ErrorImage   : string;
         InfoImage    : string;
@@ -106,8 +106,6 @@ type
       class procedure RealseMe;
   end;
 
-//var
-//  ToastMessage: TToastMessage;
 
 implementation
 
@@ -162,33 +160,32 @@ end;
 
 procedure TToastMessage.Animate(Sender: TObject);
 begin
-  //Tag 0 Show
-  if PanelBox.Tag = 0 then
-    begin
-      PanelBox.Visible := True;
+    if PanelBox.Tag = 0 then
+      begin
+        PanelBox.Visible := True;
 
-      PanelBox.Top := PanelBox.Top + 1;
+        PanelBox.Top := PanelBox.Top + 1;
 
-      if PanelBox.Top = MaxTop then
-        begin
-          TimerAnimation.Enabled := False;
-          TimerWaiting.Enabled   := True;
-          PanelBox.Tag           := 1;
-        end;
-    end
-  //Tag 1 Hide
-  else if PanelBox.Tag = 1 then
-    begin
-      PanelBox.Top := PanelBox.Top - 1;
+        if PanelBox.Top = MaxTop then
+          begin
+            TimerAnimation.Enabled := False;
+            TimerWaiting.Enabled   := True;
+            PanelBox.Tag           := 1;
+          end;
+      end
+    //Tag 1 Hide
+    else if PanelBox.Tag = 1 then
+      begin
+        PanelBox.Top := PanelBox.Top - 1;
 
-      if PanelBox.Top = MinTop then
-        begin
-          TimerAnimation.Enabled := False;
-          TimerWaiting.Enabled   := False;
-          PanelBox.Tag           := 0;
-          PanelBox.Parent := nil;
-        end;
-    end;
+        if PanelBox.Top = MinTop then
+          begin
+            TimerAnimation.Enabled := False;
+            TimerWaiting.Enabled   := False;
+            PanelBox.Tag           := 0;
+            PanelBox.Parent := nil;
+          end;
+      end;
 end;
 
 procedure TToastMessage.Wait(Sender: TObject);
@@ -401,6 +398,8 @@ end;
 procedure TToastMessage.Toast(const MessageType : tpMode; pTitle, pText : string);
 var hs,tmp:integer;
 begin
+  FormHeight:=(Self.PanelBox.Parent as TForm).Height;
+
   Self.PanelBox.BringToFront; //Z轴方向放到最顶上； //pcplayer
   Title.Caption := pTitle;
   Text.Caption  := pText;
@@ -416,7 +415,7 @@ begin
     hs:= (PanelBox.Width-50) div tmp; //每行容纳n个字符
     hs:=utf8length(pText) div hs;  //n行
     PanelBox.Height:=Title.Height+Text.Height+(hs-1)*Text.Canvas.TextHeight(pText);
-    MinTop:=-47*(hs-1);
+    MinTop:=-PanelBox.Height;
   end;
   PanelBox.Left := Trunc(((Self.PanelBox.Parent as TForm).Width / 2) - (PanelBox.Width / 2));
   //秋风
