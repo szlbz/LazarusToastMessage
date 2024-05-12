@@ -9,7 +9,6 @@ unit uTToastMessage;
 
 pcplayer修改日志：
   来自https://github.com/desenvolvimentojd3/DelphiToastMessage
-  我对它进行了一些修改：
   1. 增加一个全局变量  ToastMessage: TToastMessage; 这样就一个实例可以显示到所有 Form 里面去，
      而不是它的例子那样，每个 Form 都需要自己创建实例；
   2. 因为要一个实例，显示到所有 Form 里面去，因此增加了一个 Toast 方法，给 Parent；
@@ -18,6 +17,24 @@ pcplayer修改日志：
   todo: 上述修改都基于一种情况：每次只显示一条信息。
         如果一次要显示很多条，类似一下弹出好几条信息，依次伸出多条显示，然后依次缩回去，就需要多个实例。
         这种情况下，需要增加一些代码，比如内部增加一个 List 来存放多个实例。
+
+  4. 修改：去掉全局的 ToastMessage，用类变量和类方法来封装。这样用起来就简单了，直接调用类方法搞定。
+
+  5. todo: 因此，如果同时要显示多个 Toast，则需要有一个类变量是 List
+
+  6. About free object:
+  6.1. if PanelBox is not on showing, release PanelBox is no problem.
+  6.2. if PanelBox has shown on a form, its parent is this form, but PanelBox.Owner is nil.
+       So when it is showing and user close Application, we can free PanelBox safely.
+       But, even if I add a if Assigned(PanelBox) and then release it, there will raise a exception.
+       So, I set it's name property, and in this situastion, it's name is ''.
+       So, I add if PanelBox.Name <> ''.
+       The problem is: when user close application, the different of two situastion is PanelBox.Parent,
+       when it is showing, it's parent is a Form, and when form is destroy, it should not free PanelBox.
+       Because the Form is just its parent, not its owner.
+
+  7. the parent of PanelBox is a TForm, when we show message, we take over the OnResize event of TForm,
+     so, when hide message, we must return this event handler to TForm.
 
   pcplayer 2024-5-11
 --------------------------------------------------------------------------------}
@@ -74,19 +91,23 @@ type
         SuccessColor  : TColor;
         InfoColor     : TColor;
         ErrorColor    : TColor;
-       class var FToastMessage: TToastMessage;
-   public
+
+        FFormOnResize: TNotifyEvent;
+
+      class var FToastMessage: TToastMessage;
+    public
       procedure Toast(const MessageType : tpMode; pTitle, pText : string); overload;
       procedure Toast(const Parent: TWinControl; const MessageType : tpMode; pTitle, pText : string); overload;
 
       constructor Create(const Parent : TWinControl); overload;
       destructor Destroy; override;
+
       class procedure ToastIt(const Parent : TWinControl; const MessageType : tpMode; pTitle, pText : string);
       class procedure RealseMe;
   end;
 
-var
-  ToastMessage: TToastMessage;
+//var
+//  ToastMessage: TToastMessage;
 
 implementation
 
@@ -127,8 +148,8 @@ begin
   CreatePanelBox(Parent);
 
   {Create Timer}
-  TimerAnimation := TTimer.Create(Parent);
-  TimerWaiting   := TTimer.Create(Parent);
+  TimerAnimation := TTimer.Create(PanelBox);
+  TimerWaiting   := TTimer.Create(PanelBox);
 
   TimerAnimation.Interval := 15;
   TimerAnimation.OnTimer  := @Animate;
@@ -175,7 +196,7 @@ begin
   TimerAnimation.Enabled := True;
 end;
 
-procedure TToastMessage.Base64ToPng(imagepng:TImage;const StringBase64: string) ;
+procedure TToastMessage.Base64ToPng(imagepng:TImage;const StringBase64: string);
 var
   Input  : TStringStream;
   Output : TBytesStream;
@@ -208,6 +229,8 @@ begin
 
   {Create Principal Panel}
   PanelBox                  := TPanel.Create(nil);
+  PanelBox.Name := 'MyPanelBox';
+  PanelBox.Caption := '';
   PanelBox.Visible          := True;
   PanelBox.Parent           := Parent;
   PanelBox.BorderStyle      := bsNone;
@@ -222,6 +245,8 @@ begin
 
   {Create Panel Vertical Line}
   PanelLine                  := TPanel.Create(PanelBox);
+  PanelLine.Name := 'MyPanelLine';
+  PanelLine.Caption := '';
   PanelLine.Parent           := PanelBox;
   PanelLine.BorderStyle      := bsNone;
   PanelLine.Align            := alLeft;
@@ -234,6 +259,8 @@ begin
 
   {Create Image}
   PanelImage             := TPanel.Create(PanelBox);
+  PanelImage.Name := 'MyPanelImage';
+  PanelImage.Caption := '';
   PanelImage.Parent      := PanelBox;
   PanelImage.Visible     := True;
   PanelImage.Align       := alLeft;
@@ -246,6 +273,7 @@ begin
   PanelImage.Width       := 31;
 
   Image := TImage.Create(PanelImage);
+  Image.Name := 'MyImage';
 
   Image.Align        := AlClient;
   Image.Parent       := PanelImage;
@@ -255,6 +283,8 @@ begin
 
   {Create Panel Message}
   PanelMessage             := TPanel.Create(PanelBox);
+  PanelMessage.Name := 'MyPanelMessage';
+  PanelMessage.Caption := '';
   PanelMessage.Parent      := PanelBox;
   PanelMessage.Visible     := True;
   PanelMessage.Align       := alClient;
@@ -265,6 +295,7 @@ begin
 
   {Create Title}
   Title := TLabel.Create(PanelMessage);
+  Title.Name := 'LabelTitle';
 
   Title.Parent      := PanelMessage;
   Title.AutoSize    := True;
@@ -282,6 +313,7 @@ begin
 
  {Create Text}
   Text := TLabel.Create(PanelMessage);
+  Text.Name := 'LabelText';
 
   Text.Parent       := PanelMessage;
   Text.AutoSize     := True;
@@ -295,23 +327,17 @@ begin
   Text.Font.Size    := 8;
   Text.Transparent  := True;
   Text.Font.Style   := [fsBold];
-
-  if Assigned(Parent) then
-  begin
-    Self.SetParent(Parent);
-  end;
 end;
 
 destructor TToastMessage.Destroy;
 begin
   if Assigned(PanelBox) then
-    PanelBox.Destroy;
-
-  if Assigned(TimerAnimation) then
-    TimerAnimation.Destroy;
-
-  if Assigned(TimerWaiting) then
-    TimerWaiting.Destroy;
+  begin
+    if PanelBox.Name <> '' then
+    begin
+      FreeAndNil(PanelBox);
+    end;
+  end;
 end;
 
 procedure TToastMessage.PanelBoxPosition(Sender: TObject);
@@ -334,10 +360,16 @@ procedure TToastMessage.SetParent(const Parent: TWinControl);
 begin
   //add by pcplayer
   Self.PanelBox.Parent := Parent;
+
+  if not Assigned(Parent) then Exit;
+
   PanelBoxPosition(Parent);
 
   if Parent is TForm then
+  begin
+    Self.FFormOnResize := (Parent as TForm).OnResize;
     (Parent as TForm).OnResize := @PanelBoxPosition;
+  end;
 end;
 
 class procedure TToastMessage.RealseMe;
@@ -409,10 +441,9 @@ begin
 end;
 
 initialization
-  ToastMessage := TToastMessage.Create(nil);
 
 finalization
-  ToastMessage.Free;  //一旦使用，就会给它设置 Parent，一旦有 Parent，某个 Form 退出关闭时，就会消灭它。因此，必须在隐藏后，取消它的 Parent;
+TToastMessage.RealseMe;
 
 
 end.
