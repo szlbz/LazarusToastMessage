@@ -70,7 +70,6 @@ type
       procedure Base64ToPng(imagepng:TImage;const StringBase64: string);
       var
         Timer : TTimer;
-        FormHeight  :integer;
         SuccessImage : string;
         ErrorImage   : string;
         InfoImage    : string;
@@ -398,8 +397,6 @@ end;
 procedure TToastMessage.Toast(const MessageType : tpMode; pTitle, pText : string);
 var hs,tmp:integer;
 begin
-  FormHeight:=(Self.PanelBox.Parent as TForm).Height;
-
   Self.PanelBox.BringToFront; //Z轴方向放到最顶上； //pcplayer
   Title.Caption := pTitle;
   Text.Caption  := pText;
