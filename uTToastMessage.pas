@@ -41,7 +41,7 @@ pcplayer–ﬁ∏ƒ»’÷æ£∫
 interface
 
 uses
-     System.NetEncoding,
+     Base64,
      lazutf8,
      Graphics,
      Controls,
@@ -195,21 +195,23 @@ end;
 procedure TToastMessage.Base64ToPng(imagepng:TImage;const StringBase64: string);
 var
   Input  : TStringStream;
-  Output : TBytesStream;
+  Outstream : TStringStream;
+  Decoder   : TBase64DecodingStream;
 begin
   Input := TStringStream.Create(StringBase64, TEncoding.ASCII);
   try
-    Output := TBytesStream.Create;
+    Outstream:=TStringStream.Create('');
     try
-      TNetEncoding.Base64.Decode(Input, Output);
-      Output.Position := 0;
+      Decoder:=TBase64DecodingStream.Create(Input,bdmMIME);
       try
-        imagepng.Picture.LoadFromStream(Output);
-      except
-        raise;
+         Outstream.CopyFrom(Decoder,Decoder.Size);
+      finally
+        Decoder.Free;
       end;
+      Outstream.Position:=0;
+      imagepng.Picture.LoadFromStream(Outstream);
     finally
-      Output.Free;
+      Outstream.Free;
     end;
   finally
     Input.Free;
