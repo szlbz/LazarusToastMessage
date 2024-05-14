@@ -80,7 +80,9 @@ type
         Text         : TLabel;
         MaxTop       : Integer;
         MinTop       : Integer;
-
+        ToastHeith   : integer;
+        OldPanelBoxTop :integer;
+        ToastDirection : integer;
         TimerAnimation : TTimer;
         TimerWaiting   : TTimer;
 
@@ -95,13 +97,14 @@ type
 
       class var FToastMessage: TToastMessage;
     public
-      procedure Toast(const MessageType : tpMode; pTitle, pText : string); overload;
-      procedure Toast(const Parent: TWinControl; const MessageType : tpMode; pTitle, pText : string); overload;
+
+      procedure Toast(const MessageType : tpMode; pTitle, pText : string;TD:integer = 1); overload;
+      procedure Toast(const Parent: TWinControl; const MessageType : tpMode; pTitle, pText : string;TD:integer = 1); overload;
 
       constructor Create(const Parent : TWinControl); overload;
       destructor Destroy; override;
 
-      class procedure ToastIt(const Parent : TWinControl; const MessageType : tpMode; pTitle, pText : string);
+      class procedure ToastIt(const Parent : TWinControl; const MessageType : tpMode; pTitle, pText : string;TD:integer =1);
       class procedure RealseMe;
   end;
 
@@ -158,32 +161,59 @@ begin
 end;
 
 procedure TToastMessage.Animate(Sender: TObject);
+var
+  PanelBoxTop,PanelBoxMaxTop,PanelBoxMinTop:integer;
 begin
     if PanelBox.Tag = 0 then
       begin
         PanelBox.Visible := True;
 
-        PanelBox.Top := PanelBox.Top + 1;
+        if ToastDirection=2 then
+        begin
+          dec(ToastHeith);
+          PanelBoxTop:=ToastHeith;
+          PanelBoxMaxTop:=(Self.PanelBox.Parent as TForm).Height-abs(MinTop)-MaxTop
+        end;
+        if ToastDirection=1 then
+        begin
+          PanelBox.Top := PanelBox.Top + 1;
+          PanelBoxTop:= PanelBox.Top;
+          PanelBoxMaxTop:= MaxTop;
+        end;
+        PanelBox.Top := PanelBoxTop ;
 
-        if PanelBox.Top = MaxTop then
-          begin
-            TimerAnimation.Enabled := False;
-            TimerWaiting.Enabled   := True;
-            PanelBox.Tag           := 1;
-          end;
+        if PanelBox.Top = PanelBoxMaxTop then
+        begin
+          TimerAnimation.Enabled := False;
+          TimerWaiting.Enabled   := True;
+          PanelBox.Tag           := 1;
+        end;
       end
     //Tag 1 Hide
     else if PanelBox.Tag = 1 then
       begin
-        PanelBox.Top := PanelBox.Top - 1;
+        if ToastDirection=2 then
+        begin
+          inc(ToastHeith);
+          PanelBoxTop:=ToastHeith;
+          PanelBoxMinTop:= (Self.PanelBox.Parent as TForm).Height ;//-MaxTop;
+        end ;
+        if ToastDirection=1 then
+        begin
+          PanelBox.Top := PanelBox.Top - 1;
+          PanelBoxTop:= PanelBox.Top;
+          PanelBoxMinTop:=MinTop;
+        end;
+        PanelBox.Top := PanelBoxTop ;
 
-        if PanelBox.Top = MinTop then
-          begin
-            TimerAnimation.Enabled := False;
-            TimerWaiting.Enabled   := False;
-            PanelBox.Tag           := 0;
-            PanelBox.Parent := nil;
-          end;
+        if PanelBox.Top = PanelBoxMinTop then
+        begin
+          PanelBox.Top:=OldPanelBoxTop;
+          TimerAnimation.Enabled := False;
+          TimerWaiting.Enabled   := False;
+          PanelBox.Tag           := 0;
+          PanelBox.Parent := nil;
+        end;
       end;
 end;
 
@@ -379,30 +409,32 @@ begin
 end;
 
 class procedure TToastMessage.ToastIt(const Parent : TWinControl; const MessageType: tpMode; pTitle,
-  pText: string);
+  pText: string;TD:integer);
 begin
   if not Assigned(FToastMessage) then
   begin
     FToastMessage := TToastMessage.Create(Parent);
   end;
-
-  FToastMessage.Toast(Parent, MessageType, pTitle, pText);
+  FToastMessage.Toast(Parent, MessageType, pTitle, pText,td);
 end;
 
 procedure TToastMessage.Toast(const Parent: TWinControl;
-  const MessageType: tpMode; pTitle, pText: string);
+  const MessageType: tpMode; pTitle, pText: string;TD:integer);
 begin
+  //ToastDirection:=td;
   Self.SetParent(Parent);
-  Self.Toast(MessageType, pTitle, pText);
+  Self.Toast(MessageType, pTitle, pText,td);
 end;
 
-procedure TToastMessage.Toast(const MessageType : tpMode; pTitle, pText : string);
+procedure TToastMessage.Toast(const MessageType : tpMode; pTitle, pText : string;TD:integer);
 var hs,tmp:integer;
 begin
   Self.PanelBox.BringToFront; //Z轴方向放到最顶上； //pcplayer
   Title.Caption := pTitle;
   Text.Caption  := pText;
   //秋风
+  OldPanelBoxTop:=PanelBox.Top;
+  ToastDirection:=td;
   PanelBox.Height:=50;
   PanelBox.Width:=50+Text.Canvas.TextWidth(pText);
   tmp:=Text.Canvas.TextWidth('W');
@@ -417,6 +449,7 @@ begin
     MinTop:=-PanelBox.Height;
   end;
   PanelBox.Left := Trunc(((Self.PanelBox.Parent as TForm).Width / 2) - (PanelBox.Width / 2));
+  ToastHeith:=(Self.PanelBox.Parent as TForm).Height;
   //秋风
   if MessageType = tpSuccess then
     begin
