@@ -591,11 +591,11 @@ begin
     //秋风
   //计算宽度
   OldPanelBoxTop:=PanelBox.Top;
-  if td=1 then
+  if (td=1) or (td=3) or (td=5)then
   begin
     PanelBox.Top:=-50;
-  end
-  else
+  end;
+  if (td=2) or (td=4) or (td=6)then
   begin
     PanelBox.Top:=0;
   end;
@@ -617,14 +617,6 @@ begin
     PanelBox.Height:=Title.Height+Text.Height+(hs-1)*Text.Canvas.TextHeight(pText);
     MinTop:=-PanelBox.Height;
   end;
-  if (ToastDirection=1) or (ToastDirection=2) then  //居中
-    PanelBox.Left := Trunc(((Self.PanelBox.Parent as TForm).Width / 2) - (PanelBox.Width / 2));
-
-  if (ToastDirection=3) or (ToastDirection=5) then  //左齐
-    PanelBox.Left := 7;
-
-  if (ToastDirection=5) or (ToastDirection=6) then  //右对齐
-    PanelBox.Left := ((Self.PanelBox.Parent as TForm).Width) - PanelBox.Width-7;
 
   ToastHeith:=(Self.PanelBox.Parent as TForm).Height;
 
