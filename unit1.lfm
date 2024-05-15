@@ -7,22 +7,13 @@ object Form1: TForm1
   ClientHeight = 544
   ClientWidth = 605
   DesignTimePPI = 144
-  object ToggleBox1: TToggleBox
-    Left = 56
-    Height = 38
-    Top = 152
-    Width = 113
-    Caption = 'ToggleBox1'
-    TabOrder = 0
-    OnChange = ToggleBox1Change
-  end
   object Button1: TButton
     Left = 56
     Height = 38
     Top = 200
     Width = 113
-    Caption = 'Button1'
-    TabOrder = 1
+    Caption = 'Success'
+    TabOrder = 0
     OnClick = Button1Click
   end
   object Button2: TButton
@@ -30,26 +21,17 @@ object Form1: TForm1
     Height = 38
     Top = 248
     Width = 113
-    Caption = 'Button2'
-    TabOrder = 2
+    Caption = 'Info'
+    TabOrder = 1
     OnClick = Button2Click
-  end
-  object ToggleBox2: TToggleBox
-    Left = 176
-    Height = 38
-    Top = 152
-    Width = 113
-    Caption = 'ToggleBox2'
-    TabOrder = 3
-    OnChange = ToggleBox2Change
   end
   object Button3: TButton
     Left = 176
     Height = 38
     Top = 200
     Width = 113
-    Caption = 'Button3'
-    TabOrder = 4
+    Caption = 'Success'
+    TabOrder = 2
     OnClick = Button3Click
   end
   object Button4: TButton
@@ -57,49 +39,31 @@ object Form1: TForm1
     Height = 38
     Top = 248
     Width = 113
-    Caption = 'Button4'
-    TabOrder = 5
+    Caption = 'Info'
+    TabOrder = 3
     OnClick = Button4Click
   end
   object Label1: TLabel
-    Left = 152
+    Left = 142
     Height = 24
     Top = 96
-    Width = 36
-    Caption = '居中'
+    Width = 72
+    Caption = '居中显示'
   end
   object Label2: TLabel
-    Left = 152
+    Left = 131
     Height = 24
     Top = 304
-    Width = 54
-    Caption = '左对齐'
-  end
-  object ToggleBox3: TToggleBox
-    Left = 56
-    Height = 38
-    Top = 360
-    Width = 113
-    Caption = 'ToggleBox3'
-    TabOrder = 6
-    OnChange = ToggleBox3Change
-  end
-  object ToggleBox4: TToggleBox
-    Left = 176
-    Height = 38
-    Top = 360
-    Width = 113
-    Caption = 'ToggleBox4'
-    TabOrder = 7
-    OnChange = ToggleBox4Change
+    Width = 90
+    Caption = '左对齐显示'
   end
   object Button5: TButton
     Left = 56
     Height = 38
     Top = 408
     Width = 113
-    Caption = 'Button5'
-    TabOrder = 8
+    Caption = 'Success'
+    TabOrder = 4
     OnClick = Button5Click
   end
   object Button6: TButton
@@ -107,8 +71,8 @@ object Form1: TForm1
     Height = 38
     Top = 408
     Width = 113
-    Caption = 'Button6'
-    TabOrder = 9
+    Caption = 'Success'
+    TabOrder = 5
     OnClick = Button6Click
   end
   object Button7: TButton
@@ -116,8 +80,8 @@ object Form1: TForm1
     Height = 38
     Top = 456
     Width = 113
-    Caption = 'Button7'
-    TabOrder = 10
+    Caption = 'Info'
+    TabOrder = 6
     OnClick = Button7Click
   end
   object Button8: TButton
@@ -125,42 +89,24 @@ object Form1: TForm1
     Height = 38
     Top = 456
     Width = 113
-    Caption = 'Button8'
-    TabOrder = 11
+    Caption = 'Info'
+    TabOrder = 7
     OnClick = Button8Click
   end
   object Label3: TLabel
-    Left = 416
+    Left = 395
     Height = 24
     Top = 304
-    Width = 54
-    Caption = '右对齐'
-  end
-  object ToggleBox5: TToggleBox
-    Left = 320
-    Height = 38
-    Top = 360
-    Width = 113
-    Caption = 'ToggleBox5'
-    TabOrder = 12
-    OnChange = ToggleBox5Change
-  end
-  object ToggleBox6: TToggleBox
-    Left = 440
-    Height = 38
-    Top = 360
-    Width = 113
-    Caption = 'ToggleBox6'
-    TabOrder = 13
-    OnChange = ToggleBox6Change
+    Width = 90
+    Caption = '右对齐显示'
   end
   object Button9: TButton
     Left = 320
     Height = 38
     Top = 408
     Width = 113
-    Caption = 'Button9'
-    TabOrder = 14
+    Caption = 'Success'
+    TabOrder = 8
     OnClick = Button9Click
   end
   object Button10: TButton
@@ -168,8 +114,8 @@ object Form1: TForm1
     Height = 38
     Top = 408
     Width = 113
-    Caption = 'Button10'
-    TabOrder = 15
+    Caption = 'Success'
+    TabOrder = 9
     OnClick = Button10Click
   end
   object Button11: TButton
@@ -177,8 +123,8 @@ object Form1: TForm1
     Height = 38
     Top = 456
     Width = 113
-    Caption = 'Button11'
-    TabOrder = 16
+    Caption = 'Info'
+    TabOrder = 10
     OnClick = Button11Click
   end
   object Button12: TButton
@@ -186,8 +132,8 @@ object Form1: TForm1
     Height = 38
     Top = 456
     Width = 113
-    Caption = 'Button12'
-    TabOrder = 17
+    Caption = 'Info'
+    TabOrder = 11
     OnClick = Button12Click
   end
   object Label4: TLabel
@@ -231,5 +177,59 @@ object Form1: TForm1
     Top = 328
     Width = 72
     Caption = '从底向上'
+  end
+  object Button13: TButton
+    Left = 56
+    Height = 38
+    Top = 152
+    Width = 113
+    Caption = 'Error'
+    TabOrder = 12
+    OnClick = Button13Click
+  end
+  object Button14: TButton
+    Left = 176
+    Height = 38
+    Top = 152
+    Width = 113
+    Caption = 'Error'
+    TabOrder = 13
+    OnClick = Button14Click
+  end
+  object Button15: TButton
+    Left = 56
+    Height = 38
+    Top = 360
+    Width = 113
+    Caption = 'Error'
+    TabOrder = 14
+    OnClick = Button15Click
+  end
+  object Button16: TButton
+    Left = 176
+    Height = 38
+    Top = 360
+    Width = 113
+    Caption = 'Error'
+    TabOrder = 15
+    OnClick = Button16Click
+  end
+  object Button17: TButton
+    Left = 320
+    Height = 38
+    Top = 360
+    Width = 113
+    Caption = 'Error'
+    TabOrder = 16
+    OnClick = Button17Click
+  end
+  object Button18: TButton
+    Left = 440
+    Height = 38
+    Top = 360
+    Width = 113
+    Caption = 'Error'
+    TabOrder = 17
+    OnClick = Button18Click
   end
 end

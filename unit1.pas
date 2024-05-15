@@ -17,6 +17,12 @@ type
     Button10: TButton;
     Button11: TButton;
     Button12: TButton;
+    Button13: TButton;
+    Button14: TButton;
+    Button15: TButton;
+    Button16: TButton;
+    Button17: TButton;
+    Button18: TButton;
     Button2: TButton;
     Button3: TButton;
     Button4: TButton;
@@ -34,15 +40,15 @@ type
     Label7: TLabel;
     Label8: TLabel;
     Label9: TLabel;
-    ToggleBox1: TToggleBox;
-    ToggleBox2: TToggleBox;
-    ToggleBox3: TToggleBox;
-    ToggleBox4: TToggleBox;
-    ToggleBox5: TToggleBox;
-    ToggleBox6: TToggleBox;
     procedure Button10Click(Sender: TObject);
     procedure Button11Click(Sender: TObject);
     procedure Button12Click(Sender: TObject);
+    procedure Button13Click(Sender: TObject);
+    procedure Button14Click(Sender: TObject);
+    procedure Button15Click(Sender: TObject);
+    procedure Button16Click(Sender: TObject);
+    procedure Button17Click(Sender: TObject);
+    procedure Button18Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
@@ -52,12 +58,7 @@ type
     procedure Button7Click(Sender: TObject);
     procedure Button8Click(Sender: TObject);
     procedure Button9Click(Sender: TObject);
-    procedure ToggleBox1Change(Sender: TObject);
-    procedure ToggleBox2Change(Sender: TObject);
-    procedure ToggleBox3Change(Sender: TObject);
-    procedure ToggleBox4Change(Sender: TObject);
     procedure ToggleBox5Change(Sender: TObject);
-    procedure ToggleBox6Change(Sender: TObject);
   private
 
   public
@@ -73,36 +74,6 @@ implementation
 
 { TForm1 }
 
-procedure TForm1.ToggleBox1Change(Sender: TObject);
-begin
-  TToastMessage.ToastIt(Self, tpError,'Error','Hello, found a error!Toast lazarus的版本可以跨平台使用.Hello, found a error!Toast lazarus的版本可以跨平台使用.');
-end;
-
-procedure TForm1.ToggleBox2Change(Sender: TObject);
-begin
-  TToastMessage.ToastIt(Self, tpError,'Error','Hello, found a error!Toast lazarus的版本可以跨平台使用.Hello, found a error!Toast lazarus的版本可以跨平台使用.',2);
-end;
-
-procedure TForm1.ToggleBox3Change(Sender: TObject);
-begin
-  TToastMessage.ToastIt(Self, tpError,'Error','Hello, found a error!Toast lazarus的版本可以跨平台使用.Hello, found a error!Toast lazarus的版本可以跨平台使用.',3);
-end;
-
-procedure TForm1.ToggleBox4Change(Sender: TObject);
-begin
-  TToastMessage.ToastIt(Self, tpError,'Error','Hello, found a error!Toast lazarus的版本可以跨平台使用.Hello, found a error!Toast lazarus的版本可以跨平台使用.',4);
-end;
-
-procedure TForm1.ToggleBox5Change(Sender: TObject);
-begin
-  TToastMessage.ToastIt(Self, tpError,'Error','Hello, found a error!Toast lazarus的版本可以跨平台使用.Hello, found a error!Toast lazarus的版本可以跨平台使用.',5);
-end;
-
-procedure TForm1.ToggleBox6Change(Sender: TObject);
-begin
-  TToastMessage.ToastIt(Self, tpError,'Error','Hello, found a error!Toast lazarus的版本可以跨平台使用.Hello, found a error!Toast lazarus的版本可以跨平台使用.',6);
-end;
-
 procedure TForm1.Button1Click(Sender: TObject);
 begin
   TToastMessage.ToastIt(Self, tpSuccess,'Success','Toast lazarus的版本可以跨平台使用.Toast lazarus的版本可以跨平台使用.');
@@ -116,6 +87,36 @@ end;
 procedure TForm1.Button12Click(Sender: TObject);
 begin
   TToastMessage.ToastIt(Self, tpInfo,'Info','Toast lazarus的版本可以跨平台使用.Toast lazarus的版本可以跨平台使用.',6);
+end;
+
+procedure TForm1.Button13Click(Sender: TObject);
+begin
+  TToastMessage.ToastIt(Self, tpError,'Error','Hello, found a error!Toast lazarus的版本可以跨平台使用.Hello, found a error!Toast lazarus的版本可以跨平台使用.');
+end;
+
+procedure TForm1.Button14Click(Sender: TObject);
+begin
+  TToastMessage.ToastIt(Self, tpError,'Error','Hello, found a error!Toast lazarus的版本可以跨平台使用.Hello, found a error!Toast lazarus的版本可以跨平台使用.',2);
+end;
+
+procedure TForm1.Button15Click(Sender: TObject);
+begin
+  TToastMessage.ToastIt(Self, tpError,'Error','Hello, found a error!Toast lazarus的版本可以跨平台使用.Hello, found a error!Toast lazarus的版本可以跨平台使用.',3);
+end;
+
+procedure TForm1.Button16Click(Sender: TObject);
+begin
+  TToastMessage.ToastIt(Self, tpError,'Error','Hello, found a error!Toast lazarus的版本可以跨平台使用.Hello, found a error!Toast lazarus的版本可以跨平台使用.',4);
+end;
+
+procedure TForm1.Button17Click(Sender: TObject);
+begin
+  TToastMessage.ToastIt(Self, tpError,'Error','Hello, found a error!Toast lazarus的版本可以跨平台使用.Hello, found a error!Toast lazarus的版本可以跨平台使用.',5);
+end;
+
+procedure TForm1.Button18Click(Sender: TObject);
+begin
+  TToastMessage.ToastIt(Self, tpError,'Error','Hello, found a error!Toast lazarus的版本可以跨平台使用.Hello, found a error!Toast lazarus的版本可以跨平台使用.',6);
 end;
 
 procedure TForm1.Button10Click(Sender: TObject);
@@ -161,6 +162,11 @@ end;
 procedure TForm1.Button9Click(Sender: TObject);
 begin
   TToastMessage.ToastIt(Self, tpSuccess,'Success','Toast lazarus的版本可以跨平台使用.Toast lazarus的版本可以跨平台使用.',5);
+end;
+
+procedure TForm1.ToggleBox5Change(Sender: TObject);
+begin
+  TToastMessage.ToastIt(Self, tpError,'Error','Hello, found a error!Toast lazarus的版本可以跨平台使用.Hello, found a error!Toast lazarus的版本可以跨平台使用.',5);
 end;
 
 
