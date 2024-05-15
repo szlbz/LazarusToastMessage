@@ -253,14 +253,22 @@ begin
   if PanelBox.Tag = 0 then
   begin
     PanelBox.Visible := True;
+    if (ToastDirection=1) or (ToastDirection=2) then  //居中
+      PanelBox.Left := Trunc(((Self.PanelBox.Parent as TForm).Width / 2) - (PanelBox.Width / 2));
 
-    if ToastDirection=2 then  //从屏幕底向上
+    if (ToastDirection=3) or (ToastDirection=4) then  //左齐
+      PanelBox.Left := 7;
+
+    if (ToastDirection=5) or (ToastDirection=6) then  //右对齐
+      PanelBox.Left := ((Self.PanelBox.Parent as TForm).Width) - PanelBox.Width-7;
+
+    if (ToastDirection=2) or (ToastDirection=4) or (ToastDirection=6) then  //从屏幕底向上
     begin
       dec(ToastHeith);
       PanelBoxMaxTop:=(Self.PanelBox.Parent as TForm).Height-abs(MinTop)-MaxTop;
       PanelBox.Top := ToastHeith ;
     end;
-    if ToastDirection=1 then //从屏幕顶向下
+    if (ToastDirection=1) or (ToastDirection=3) or (ToastDirection=5) then //从屏幕顶向下
     begin
       PanelBoxTop:= PanelBoxTop+1;
       PanelBoxMaxTop:= MaxTop;
@@ -277,13 +285,13 @@ begin
   else      //Tag 1 Hide
   if PanelBox.Tag = 1 then
   begin
-    if ToastDirection=2 then //从屏幕底向下收
+    if (ToastDirection=2) or (ToastDirection=4) or (ToastDirection=6) then //从屏幕底向下收
     begin
       inc(ToastHeith);
       PanelBoxMinTop:= (Self.PanelBox.Parent as TForm).Height ;//-MaxTop;
       PanelBox.Top := ToastHeith ;
     end ;
-    if ToastDirection=1 then   //从屏幕顶向上收
+    if (ToastDirection=1) or (ToastDirection=3) or (ToastDirection=5) then   //从屏幕顶向上收
     begin
       PanelBoxTop:=PanelBoxTop-1;
       PanelBoxMinTop:=MinTop;
@@ -609,7 +617,15 @@ begin
     PanelBox.Height:=Title.Height+Text.Height+(hs-1)*Text.Canvas.TextHeight(pText);
     MinTop:=-PanelBox.Height;
   end;
-  PanelBox.Left := Trunc(((Self.PanelBox.Parent as TForm).Width / 2) - (PanelBox.Width / 2));
+  if (ToastDirection=1) or (ToastDirection=2) then  //居中
+    PanelBox.Left := Trunc(((Self.PanelBox.Parent as TForm).Width / 2) - (PanelBox.Width / 2));
+
+  if (ToastDirection=3) or (ToastDirection=5) then  //左齐
+    PanelBox.Left := 7;
+
+  if (ToastDirection=5) or (ToastDirection=6) then  //右对齐
+    PanelBox.Left := ((Self.PanelBox.Parent as TForm).Width) - PanelBox.Width-7;
+
   ToastHeith:=(Self.PanelBox.Parent as TForm).Height;
 
   Self.SetParent(Parent);
