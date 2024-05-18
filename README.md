@@ -10,6 +10,6 @@
 
 秋风 2024-05-12
 
-!(GIF.gif)
+![screenshot](GIF.gif)
 
 ![截图1](GIF.gif)  
