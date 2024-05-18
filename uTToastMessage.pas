@@ -46,31 +46,31 @@ unit uTToastMessage;
 interface
 
 uses
-     {$ifdef fpc}
-     Base64,
-     lazutf8,
-     Graphics,
-     Controls,
-     Extctrls,
-     StdCtrls,
-     Classes,
-     SysUtils,
-     Forms,
-     Messages;
-     {$else}
-     System.NetEncoding,
-     Vcl.Graphics,
-     Vcl.Controls,
-     Vcl.Extctrls,
-     Vcl.StdCtrls,
-     Vcl.Imaging.pngimage,
-     System.Classes,
-     System.Generics.Collections,
-     System.SysUtils,
-     Forms,
-     Winapi.Windows,
-     Winapi.Messages;
-     {$endif}
+{$ifdef fpc}
+  Base64,
+  lazutf8,
+  Graphics,
+  Controls,
+  Extctrls,
+  StdCtrls,
+  Classes,
+  SysUtils,
+  Forms,
+  Messages;
+{$else}
+  System.NetEncoding,
+  Vcl.Graphics,
+  Vcl.Controls,
+  Vcl.Extctrls,
+  Vcl.StdCtrls,
+  Vcl.Imaging.pngimage,
+  System.Classes,
+  System.Generics.Collections,
+  System.SysUtils,
+  Forms,
+  Winapi.Windows,
+  Winapi.Messages;
+{$endif}
 
 type tpMode = (tpSuccess,tpInfo,tpError);
 
@@ -95,8 +95,6 @@ type
     function GetIsShowing: Boolean;
     procedure CheckMessageQueue;
     var
-      //Timer : TTimer;
-
       SuccessImage : string;
       ErrorImage   : string;
       InfoImage    : string;
@@ -480,7 +478,7 @@ begin
   Title.WordWrap    := True;
   Title.Enabled     := True;
   Title.Font.Color  := TitleColor;
-  Title.Font.Name   := 'Segoe UI';
+  Title.Font.Name   := 'default';
   Title.Font.Size   := 10;
   Title.Transparent := True;
   Title.Font.Style  := [fsBold];
@@ -498,7 +496,7 @@ begin
   Text.WordWrap     := True;
   Text.Enabled      := True;
   Text.Font.Color   := TextColor;
-  Text.Font.Name    := 'Segoe UI';
+  Text.Font.Name    := 'default';
   Text.Font.Size    := 8;
   Text.Transparent  := True;
   Text.Font.Style   := [fsBold];
@@ -672,12 +670,6 @@ begin
   //Start Toast
   TimerAnimation.Enabled := True;
 end;
-
-//initialization
-//  ToastMessage := TToastMessage.Create(nil);
-//
-//finalization
-//  ToastMessage.Free;  //一旦使用，就会给它设置 Parent，一旦有 Parent，某个 Form 退出关闭时，就会消灭它。因此，必须在隐藏后，取消它的 Parent;
 
 initialization
 
