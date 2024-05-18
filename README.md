@@ -12,4 +12,3 @@
 
 ![screenshot](GIF.gif)
 
-![截图1](GIF.gif)  
