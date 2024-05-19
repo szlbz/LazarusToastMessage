@@ -49,6 +49,7 @@ uses
 {$ifdef fpc}
   Base64,
   lazutf8,
+  LConvEncoding,
   Graphics,
   Controls,
   Extctrls,
@@ -71,6 +72,9 @@ uses
   Winapi.Windows,
   Winapi.Messages;
 {$endif}
+
+const
+  ToastFontName='default';
 
 type tpMode = (tpSuccess,tpInfo,tpError);
 
@@ -126,14 +130,14 @@ type
     class var FToastMessage: TToastMessage;
     class var FMessageList: TStringList;
   public
-    procedure Toast(const MessageType : tpMode; pTitle, pText : string;TD:integer); overload;
-    procedure Toast(const Parent: TWinControl; const MessageType : tpMode; pTitle, pText : string;TD:integer); overload;
+    procedure Toast(const MessageType : tpMode; pTitle, pText : string;TD:integer;_ToastFontName:string = ToastFontName); overload;
+    procedure Toast(const Parent: TWinControl; const MessageType : tpMode; pTitle, pText : string;TD:integer;_ToastFontName:string = ToastFontName); overload;
 
     constructor Create(const Parent : TWinControl); overload;
     destructor Destroy; override;
 
-    class procedure ToastIt(const Parent : TWinControl; const MessageType : tpMode; pTitle, pText : string;TD:integer =1);
-    class procedure RealseMe;
+    class procedure ToastIt(const Parent : TWinControl; const MessageType : tpMode; pTitle, pText : string;TD:integer =1;_ToastFontName:string=ToastFontName);
+    class procedure ReleaseMe;
 
     property IsShowing: Boolean read GetIsShowing;
   end;
@@ -254,7 +258,7 @@ begin
     if (ToastDirection=1) or (ToastDirection=2) then  //居中
       PanelBox.Left := Trunc(((Self.PanelBox.Parent as TForm).Width / 2) - (PanelBox.Width / 2));
 
-    if (ToastDirection=3) or (ToastDirection=4) then  //左齐
+    if (ToastDirection=3) or (ToastDirection=4) then  //左对齐
       PanelBox.Left := 7;
 
     if (ToastDirection=5) or (ToastDirection=6) then  //右对齐
@@ -478,7 +482,7 @@ begin
   Title.WordWrap    := True;
   Title.Enabled     := True;
   Title.Font.Color  := TitleColor;
-  Title.Font.Name   := 'default';
+  Title.Font.Name   := ToastFontName;
   Title.Font.Size   := 10;
   Title.Transparent := True;
   Title.Font.Style  := [fsBold];
@@ -496,7 +500,7 @@ begin
   Text.WordWrap     := True;
   Text.Enabled      := True;
   Text.Font.Color   := TextColor;
-  Text.Font.Name    := 'default';
+  Text.Font.Name    := ToastFontName;
   Text.Font.Size    := 8;
   Text.Transparent  := True;
   Text.Font.Style   := [fsBold];
@@ -536,7 +540,7 @@ begin
   end;
 end;
 
-class procedure TToastMessage.RealseMe;
+class procedure TToastMessage.ReleaseMe;
 begin
   if Assigned(FToastMessage) then
   begin
@@ -571,10 +575,12 @@ begin
 end;
 
 procedure TToastMessage.Toast(const Parent: TWinControl;
-  const MessageType: tpMode; pTitle, pText: string;TD:integer);
+  const MessageType: tpMode; pTitle, pText: string;TD:integer;_ToastFontName:string=ToastFontName);
 var
   hs, tmp: Integer;
 begin
+  Title.Font.Name:=ToastFontName;
+  Text.Font.Name:=ToastFontName;
   if Self.IsShowing then
   begin
     if not Assigned(FMessageList) then
@@ -582,24 +588,16 @@ begin
       FMessageList := TStringList.Create;
     end;
     FMessageList.AddObject(Ord(MessageType).ToString + ';' + pTitle + ';' + pText+';'+td.ToString, Parent); //push message to queue;2024-5-12
-
     Exit;
-  end;
+  end
+  else   ToastDirection:=td;
 
-    //秋风
+  //秋风
   //计算宽度
   OldPanelBoxTop:=PanelBox.Top;
-  if (td=1) or (td=3) or (td=5)then
-  begin
-    PanelBox.Top:=-50;
-  end;
-  if (td=2) or (td=4) or (td=6)then
-  begin
-    PanelBox.Top:=0;
-  end;
+  PanelBox.Top:=-50;
 
   PanelBoxTop:=PanelBox.Top;
-  ToastDirection:=td;
 
   PanelBox.Parent := Parent;
   PanelBox.Height := 50;
@@ -619,25 +617,27 @@ begin
   ToastHeith:=(Self.PanelBox.Parent as TForm).Height;
 
   Self.SetParent(Parent);
-  Self.Toast(MessageType, pTitle, pText,td);
+  Self.Toast(MessageType, pTitle, pText,td,_ToastFontName);
 end;
 
 class procedure TToastMessage.ToastIt(const Parent : TWinControl; const MessageType: tpMode; pTitle,
-  pText: string;TD:integer =1);
+  pText: string;TD:integer =1;_ToastFontName:string=ToastFontName);
 begin
   if not Assigned(FToastMessage) then
   begin
     FToastMessage := TToastMessage.Create(Parent);
   end;
 
-  FToastMessage.Toast(Parent, MessageType, pTitle, pText,td);
+  FToastMessage.Toast(Parent, MessageType, pTitle, pText,td,_ToastFontName);
 end;
 
-procedure TToastMessage.Toast(const MessageType : tpMode; pTitle, pText : string;TD:integer);
+procedure TToastMessage.Toast(const MessageType : tpMode; pTitle, pText : string;TD:integer;_ToastFontName:string=ToastFontName);
 begin
   Self.PanelBox.BringToFront; //Z轴方向放到最顶上； //pcplayer
   Title.Caption := pTitle;
   Text.Caption  := pText;
+  Title.Font.Name:=_ToastFontName;
+  Text.Font.Name:=_ToastFontName;
 
   if MessageType = tpSuccess then
   begin
@@ -674,6 +674,6 @@ end;
 initialization
 
 finalization
-  TToastMessage.RealseMe;
+  TToastMessage.ReleaseMe;
 
 end.
