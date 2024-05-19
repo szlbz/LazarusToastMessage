@@ -1,232 +1,232 @@
 object Form1: TForm1
   Left = 403
-  Height = 544
+  Height = 487
   Top = 36
-  Width = 605
+  Width = 675
   Caption = 'Form1'
-  ClientHeight = 544
-  ClientWidth = 605
+  ClientHeight = 487
+  ClientWidth = 675
   DesignTimePPI = 144
   object Button1: TButton
-    Left = 56
+    Left = 120
     Height = 38
-    Top = 200
+    Top = 160
     Width = 113
     Caption = 'Success'
     TabOrder = 0
     OnClick = Button1Click
   end
   object Button2: TButton
-    Left = 56
+    Left = 120
     Height = 38
-    Top = 248
+    Top = 208
     Width = 113
     Caption = 'Info'
     TabOrder = 1
     OnClick = Button2Click
   end
   object Button3: TButton
-    Left = 176
+    Left = 240
     Height = 38
-    Top = 200
+    Top = 160
     Width = 113
     Caption = 'Success'
     TabOrder = 2
     OnClick = Button3Click
   end
   object Button4: TButton
-    Left = 176
+    Left = 240
     Height = 38
-    Top = 248
+    Top = 208
     Width = 113
     Caption = 'Info'
     TabOrder = 3
     OnClick = Button4Click
   end
   object Label1: TLabel
-    Left = 142
+    Left = 206
     Height = 24
-    Top = 96
+    Top = 56
     Width = 72
     Caption = '居中显示'
   end
   object Label2: TLabel
-    Left = 131
+    Left = 195
     Height = 24
-    Top = 304
+    Top = 264
     Width = 90
     Caption = '左对齐显示'
   end
   object Button5: TButton
-    Left = 56
+    Left = 120
     Height = 38
-    Top = 408
+    Top = 368
     Width = 113
     Caption = 'Success'
     TabOrder = 4
     OnClick = Button5Click
   end
   object Button6: TButton
-    Left = 176
+    Left = 240
     Height = 38
-    Top = 408
+    Top = 368
     Width = 113
     Caption = 'Success'
     TabOrder = 5
     OnClick = Button6Click
   end
   object Button7: TButton
-    Left = 56
+    Left = 120
     Height = 38
-    Top = 456
+    Top = 416
     Width = 113
     Caption = 'Info'
     TabOrder = 6
     OnClick = Button7Click
   end
   object Button8: TButton
-    Left = 176
+    Left = 240
     Height = 38
-    Top = 456
+    Top = 416
     Width = 113
     Caption = 'Info'
     TabOrder = 7
     OnClick = Button8Click
   end
   object Label3: TLabel
-    Left = 395
+    Left = 459
     Height = 24
-    Top = 304
+    Top = 264
     Width = 90
     Caption = '右对齐显示'
   end
   object Button9: TButton
-    Left = 320
+    Left = 384
     Height = 38
-    Top = 408
+    Top = 368
     Width = 113
     Caption = 'Success'
     TabOrder = 8
     OnClick = Button9Click
   end
   object Button10: TButton
-    Left = 440
+    Left = 504
     Height = 38
-    Top = 408
+    Top = 368
     Width = 113
     Caption = 'Success'
     TabOrder = 9
     OnClick = Button10Click
   end
   object Button11: TButton
-    Left = 320
+    Left = 384
     Height = 38
-    Top = 456
+    Top = 416
     Width = 113
     Caption = 'Info'
     TabOrder = 10
     OnClick = Button11Click
   end
   object Button12: TButton
-    Left = 440
+    Left = 504
     Height = 38
-    Top = 456
+    Top = 416
     Width = 113
     Caption = 'Info'
     TabOrder = 11
     OnClick = Button12Click
   end
   object Label4: TLabel
-    Left = 80
+    Left = 144
     Height = 24
-    Top = 120
+    Top = 80
     Width = 72
     Caption = '从顶向下'
   end
   object Label5: TLabel
-    Left = 200
+    Left = 264
     Height = 24
-    Top = 120
+    Top = 80
     Width = 72
     Caption = '从底向上'
   end
   object Label6: TLabel
-    Left = 80
+    Left = 144
     Height = 24
-    Top = 328
+    Top = 288
     Width = 72
     Caption = '从顶向下'
   end
   object Label7: TLabel
-    Left = 200
+    Left = 264
     Height = 24
-    Top = 328
+    Top = 288
     Width = 72
     Caption = '从底向上'
   end
   object Label8: TLabel
-    Left = 344
+    Left = 408
     Height = 24
-    Top = 328
+    Top = 288
     Width = 72
     Caption = '从顶向下'
   end
   object Label9: TLabel
-    Left = 464
+    Left = 528
     Height = 24
-    Top = 328
+    Top = 288
     Width = 72
     Caption = '从底向上'
   end
   object Button13: TButton
-    Left = 56
+    Left = 120
     Height = 38
-    Top = 152
+    Top = 112
     Width = 113
     Caption = 'Error'
     TabOrder = 12
     OnClick = Button13Click
   end
   object Button14: TButton
-    Left = 176
+    Left = 240
     Height = 38
-    Top = 152
+    Top = 112
     Width = 113
     Caption = 'Error'
     TabOrder = 13
     OnClick = Button14Click
   end
   object Button15: TButton
-    Left = 56
+    Left = 120
     Height = 38
-    Top = 360
+    Top = 320
     Width = 113
     Caption = 'Error'
     TabOrder = 14
     OnClick = Button15Click
   end
   object Button16: TButton
-    Left = 176
+    Left = 240
     Height = 38
-    Top = 360
+    Top = 320
     Width = 113
     Caption = 'Error'
     TabOrder = 15
     OnClick = Button16Click
   end
   object Button17: TButton
-    Left = 320
+    Left = 384
     Height = 38
-    Top = 360
+    Top = 320
     Width = 113
     Caption = 'Error'
     TabOrder = 16
     OnClick = Button17Click
   end
   object Button18: TButton
-    Left = 440
+    Left = 504
     Height = 38
-    Top = 360
+    Top = 320
     Width = 113
     Caption = 'Error'
     TabOrder = 17

@@ -91,7 +91,7 @@ end;
 
 procedure TForm1.Button13Click(Sender: TObject);
 begin
-  TToastMessage.ToastIt(Self, tpError,'Error','Hello, found a error!Toast lazarus的版本可以跨平台使用.Hello, found a error!Toast lazarus的版本可以跨平台使用.');
+  TToastMessage.ToastIt(Self, tpError,'Error','Hello, found a error!Toast lazarus的版本可以跨平台使用.Hello, found a error!Toast lazarus的版本可以跨平台使用.',1);
 end;
 
 procedure TForm1.Button14Click(Sender: TObject);
