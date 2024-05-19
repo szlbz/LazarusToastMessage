@@ -76,7 +76,9 @@ uses
 const
   ToastFontName='default';
 
-type tpMode = (tpSuccess,tpInfo,tpError);
+type
+    tpMode = (tpSuccess,tpInfo,tpError);
+    TToastDirection = (tdTopLeft, tdTopCenter, tdTopRight, tdBottomLeft, tdBottomCenter, tdBottomRight);
 
 type
   TToastMessage = class
@@ -113,7 +115,7 @@ type
       ToastHeith   : integer;
       PanelBoxTop:integer;
       OldPanelBoxTop :integer;
-      ToastDirection : integer;
+      ToastDirection : TToastDirection;
 
       TimerAnimation : TTimer;
       TimerWaiting   : TTimer;
@@ -130,13 +132,13 @@ type
     class var FToastMessage: TToastMessage;
     class var FMessageList: TStringList;
   public
-    procedure Toast(const MessageType : tpMode; pTitle, pText : string;TD:integer;_ToastFontName:string = ToastFontName); overload;
-    procedure Toast(const Parent: TWinControl; const MessageType : tpMode; pTitle, pText : string;TD:integer;_ToastFontName:string = ToastFontName); overload;
+    procedure Toast(const MessageType : tpMode; pTitle, pText : string;TD:TToastDirection;_ToastFontName:string = ToastFontName); overload;
+    procedure Toast(const Parent: TWinControl; const MessageType : tpMode; pTitle, pText : string;TD:TToastDirection;_ToastFontName:string = ToastFontName); overload;
 
     constructor Create(const Parent : TWinControl); overload;
     destructor Destroy; override;
 
-    class procedure ToastIt(const Parent : TWinControl; const MessageType : tpMode; pTitle, pText : string;TD:integer =1;_ToastFontName:string=ToastFontName);
+    class procedure ToastIt(const Parent : TWinControl; const MessageType : tpMode; pTitle, pText : string;TD:TToastDirection =tdTopCenter;_ToastFontName:string=ToastFontName);
     class procedure ReleaseMe;
 
     property IsShowing: Boolean read GetIsShowing;
@@ -197,7 +199,7 @@ begin
 
   MessageType := tpMode(StrToInt(AMode));
 
-  Self.Toast(AParent, MessageType, ATitle, AText,td);
+  Self.Toast(AParent, MessageType, ATitle, AText,TToastDirection(td));
 end;
 
 constructor TToastMessage.Create(const Parent : TWinControl);
@@ -255,22 +257,22 @@ begin
   if PanelBox.Tag = 0 then
   begin
     PanelBox.Visible := True;
-    if (ToastDirection=1) or (ToastDirection=2) then  //居中
+    if (ToastDirection=tdTopCenter) or (ToastDirection=tdBottomCenter) then  //居中
       PanelBox.Left := Trunc(((Self.PanelBox.Parent as TForm).Width / 2) - (PanelBox.Width / 2));
 
-    if (ToastDirection=3) or (ToastDirection=4) then  //左对齐
+    if (ToastDirection=tdTopLeft) or (ToastDirection=tdBottomLeft) then  //左对齐
       PanelBox.Left := 7;
 
-    if (ToastDirection=5) or (ToastDirection=6) then  //右对齐
+    if (ToastDirection=tdTopRight) or (ToastDirection=tdBottomRight) then  //右对齐
       PanelBox.Left := ((Self.PanelBox.Parent as TForm).Width) - PanelBox.Width-7;
 
-    if (ToastDirection=2) or (ToastDirection=4) or (ToastDirection=6) then  //从屏幕底向上
+    if (ToastDirection=tdBottomCenter) or (ToastDirection=tdBottomLeft) or (ToastDirection=tdBottomRight) then  //从屏幕底向上
     begin
       dec(ToastHeith);
       PanelBoxMaxTop:=(Self.PanelBox.Parent as TForm).Height-abs(MinTop)-MaxTop;
       PanelBox.Top := ToastHeith ;
     end;
-    if (ToastDirection=1) or (ToastDirection=3) or (ToastDirection=5) then //从屏幕顶向下
+    if (ToastDirection=tdTopCenter) or (ToastDirection=tdTopLeft) or (ToastDirection=tdTopRight) then //从屏幕顶向下
     begin
       PanelBoxTop:= PanelBoxTop+1;
       PanelBoxMaxTop:= MaxTop;
@@ -287,13 +289,13 @@ begin
   else      //Tag 1 Hide
   if PanelBox.Tag = 1 then
   begin
-    if (ToastDirection=2) or (ToastDirection=4) or (ToastDirection=6) then //从屏幕底向下收
+    if (ToastDirection=tdBottomCenter) or (ToastDirection=tdBottomLeft) or (ToastDirection=tdBottomRight) then //从屏幕底向下收
     begin
       inc(ToastHeith);
       PanelBoxMinTop:= (Self.PanelBox.Parent as TForm).Height ;//-MaxTop;
       PanelBox.Top := ToastHeith ;
     end ;
-    if (ToastDirection=1) or (ToastDirection=3) or (ToastDirection=5) then   //从屏幕顶向上收
+    if (ToastDirection=tdTopCenter) or (ToastDirection=tdTopLeft) or (ToastDirection=tdTopRight) then   //从屏幕顶向上收
     begin
       PanelBoxTop:=PanelBoxTop-1;
       PanelBoxMinTop:=MinTop;
@@ -575,7 +577,7 @@ begin
 end;
 
 procedure TToastMessage.Toast(const Parent: TWinControl;
-  const MessageType: tpMode; pTitle, pText: string;TD:integer;_ToastFontName:string=ToastFontName);
+  const MessageType: tpMode; pTitle, pText: string;TD:TToastDirection;_ToastFontName:string=ToastFontName);
 var
   hs, tmp: Integer;
 begin
@@ -587,7 +589,7 @@ begin
     begin
       FMessageList := TStringList.Create;
     end;
-    FMessageList.AddObject(Ord(MessageType).ToString + ';' + pTitle + ';' + pText+';'+td.ToString, Parent); //push message to queue;2024-5-12
+    FMessageList.AddObject(Ord(MessageType).ToString + ';' + pTitle + ';' + pText+';'+ord(td).ToString, Parent); //push message to queue;2024-5-12
     Exit;
   end
   else   ToastDirection:=td;
@@ -621,7 +623,7 @@ begin
 end;
 
 class procedure TToastMessage.ToastIt(const Parent : TWinControl; const MessageType: tpMode; pTitle,
-  pText: string;TD:integer =1;_ToastFontName:string=ToastFontName);
+  pText: string;TD:TToastDirection =tdTopCenter;_ToastFontName:string=ToastFontName);
 begin
   if not Assigned(FToastMessage) then
   begin
@@ -631,7 +633,7 @@ begin
   FToastMessage.Toast(Parent, MessageType, pTitle, pText,td,_ToastFontName);
 end;
 
-procedure TToastMessage.Toast(const MessageType : tpMode; pTitle, pText : string;TD:integer;_ToastFontName:string=ToastFontName);
+procedure TToastMessage.Toast(const MessageType : tpMode; pTitle, pText : string;TD:TToastDirection;_ToastFontName:string=ToastFontName);
 begin
   Self.PanelBox.BringToFront; //Z轴方向放到最顶上； //pcplayer
   Title.Caption := pTitle;
