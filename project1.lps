@@ -8,9 +8,9 @@
       <Unit>
         <Filename Value="project1.lpr"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="7"/>
         <CursorPos Y="18"/>
-        <UsageCount Value="51"/>
+        <UsageCount Value="92"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -20,62 +20,62 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit1"/>
-        <IsVisibleTab Value="True"/>
-        <TopLine Value="112"/>
-        <CursorPos X="161" Y="114"/>
-        <UsageCount Value="51"/>
+        <TopLine Value="92"/>
+        <CursorPos X="177" Y="94"/>
+        <UsageCount Value="92"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="uTToastMessage.pas"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="160"/>
-        <CursorPos X="31" Y="598"/>
-        <UsageCount Value="22"/>
+        <TopLine Value="578"/>
+        <CursorPos X="13" Y="603"/>
+        <UsageCount Value="42"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="..\..\fpcsrc\rtl\objpas\sysutils\sysencodingh.inc"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="3" Y="21"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="5"/>
       </Unit>
       <Unit>
         <Filename Value="..\..\fpcsrc\packages\vcl-compat\src\system.netencoding.pp"/>
         <UnitName Value="System.NetEncoding"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="58"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="5"/>
       </Unit>
       <Unit>
         <Filename Value="..\..\fpcsrc\packages\fcl-base\src\base64.pp"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="6"/>
         <TopLine Value="437"/>
         <CursorPos X="14" Y="446"/>
-        <UsageCount Value="15"/>
+        <UsageCount Value="35"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="..\..\fpcsrc\rtl\objpas\sysutils\syshelps.inc"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="5"/>
         <TopLine Value="1239"/>
         <CursorPos X="3" Y="1272"/>
-        <UsageCount Value="12"/>
+        <UsageCount Value="32"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="..\..\fpcsrc\rtl\objpas\sysutils\syshelph.inc"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="3" Y="5"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="6"/>
       </Unit>
       <Unit>
         <Filename Value="..\..\fpcsrc\rtl\objpas\classes\classesh.inc"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="4"/>
         <TopLine Value="1042"/>
         <CursorPos X="14" Y="1056"/>
-        <UsageCount Value="12"/>
+        <UsageCount Value="32"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -83,129 +83,146 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="600"/>
         <CursorPos X="3" Y="589"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="6"/>
+      </Unit>
+      <Unit>
+        <Filename Value="D:\fpcupdeluxe226\lazarus\lcl\lcltaskdialog.pas"/>
+        <UnitName Value="LCLTaskDialog"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="422"/>
+        <CursorPos X="17" Y="421"/>
+        <UsageCount Value="29"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\..\lazarus\components\lazutils\lazutf8.pas"/>
+        <UnitName Value="LazUTF8"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="103"/>
+        <UsageCount Value="29"/>
+        <Loaded Value="True"/>
       </Unit>
     </Units>
     <JumpHistory HistoryIndex="29">
       <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="123" Column="45" TopLine="116"/>
+        <Filename Value="uTToastMessage.pas"/>
+        <Caret Line="77" Column="16" TopLine="50"/>
       </Position>
       <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="164" TopLine="138"/>
+        <Filename Value="uTToastMessage.pas"/>
+        <Caret Line="135" Column="128" TopLine="109"/>
       </Position>
       <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="123" Column="143" TopLine="121"/>
+        <Filename Value="uTToastMessage.pas"/>
+        <Caret Line="136" Column="155" TopLine="110"/>
       </Position>
       <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="128" Column="43" TopLine="107"/>
+        <Filename Value="uTToastMessage.pas"/>
+        <Caret Line="141" Column="175" TopLine="115"/>
       </Position>
       <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="80" TopLine="78"/>
+        <Filename Value="uTToastMessage.pas"/>
+        <Caret Line="186" TopLine="176"/>
       </Position>
       <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="120" TopLine="117"/>
+        <Filename Value="uTToastMessage.pas"/>
+        <Caret Line="183" TopLine="176"/>
       </Position>
       <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="119" TopLine="116"/>
+        <Filename Value="uTToastMessage.pas"/>
+        <Caret Line="169" Column="15" TopLine="164"/>
       </Position>
       <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="120" TopLine="117"/>
+        <Filename Value="uTToastMessage.pas"/>
+        <Caret Line="183" TopLine="164"/>
       </Position>
       <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="79" TopLine="77"/>
+        <Filename Value="uTToastMessage.pas"/>
+        <Caret Line="188" TopLine="164"/>
       </Position>
       <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="78" TopLine="76"/>
+        <Filename Value="uTToastMessage.pas"/>
+        <Caret Line="169" TopLine="163"/>
       </Position>
       <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="79" TopLine="77"/>
+        <Filename Value="uTToastMessage.pas"/>
+        <Caret Line="171" TopLine="163"/>
       </Position>
       <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="119" TopLine="116"/>
+        <Filename Value="uTToastMessage.pas"/>
+        <Caret Line="192" TopLine="166"/>
       </Position>
       <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="120" TopLine="117"/>
+        <Filename Value="uTToastMessage.pas"/>
+        <Caret Line="169" TopLine="163"/>
       </Position>
       <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="76" TopLine="76"/>
+        <Filename Value="uTToastMessage.pas"/>
+        <Caret Line="171" TopLine="163"/>
       </Position>
       <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="120" TopLine="117"/>
+        <Filename Value="uTToastMessage.pas"/>
+        <Caret Line="192" TopLine="166"/>
       </Position>
       <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="119" TopLine="116"/>
+        <Filename Value="uTToastMessage.pas"/>
+        <Caret Line="169" TopLine="163"/>
       </Position>
       <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="120" TopLine="117"/>
+        <Filename Value="uTToastMessage.pas"/>
+        <Caret Line="171" TopLine="163"/>
       </Position>
       <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="76" TopLine="76"/>
+        <Filename Value="uTToastMessage.pas"/>
+        <Caret Line="192" TopLine="166"/>
       </Position>
       <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="120" TopLine="117"/>
+        <Filename Value="uTToastMessage.pas"/>
+        <Caret Line="169" TopLine="163"/>
       </Position>
       <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="119" TopLine="116"/>
+        <Filename Value="uTToastMessage.pas"/>
+        <Caret Line="171" TopLine="163"/>
       </Position>
       <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="120" TopLine="117"/>
+        <Filename Value="uTToastMessage.pas"/>
+        <Caret Line="192" TopLine="166"/>
       </Position>
       <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="121" TopLine="118"/>
+        <Filename Value="uTToastMessage.pas"/>
+        <Caret Line="169" TopLine="163"/>
       </Position>
       <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="77" TopLine="77"/>
+        <Filename Value="uTToastMessage.pas"/>
+        <Caret Line="171" TopLine="163"/>
       </Position>
       <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="166" TopLine="140"/>
+        <Filename Value="uTToastMessage.pas"/>
+        <Caret Line="192" TopLine="166"/>
       </Position>
       <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="77" TopLine="77"/>
+        <Filename Value="uTToastMessage.pas"/>
+        <Caret Line="169" TopLine="163"/>
       </Position>
       <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="116" TopLine="113"/>
+        <Filename Value="uTToastMessage.pas"/>
+        <Caret Line="171" TopLine="163"/>
       </Position>
       <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="115" TopLine="112"/>
+        <Filename Value="uTToastMessage.pas"/>
+        <Caret Line="173" TopLine="163"/>
       </Position>
       <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="114" TopLine="111"/>
+        <Filename Value="uTToastMessage.pas"/>
+        <Caret Line="174" TopLine="163"/>
       </Position>
       <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="120" TopLine="117"/>
+        <Filename Value="uTToastMessage.pas"/>
+        <Caret Line="169" Column="11" TopLine="160"/>
       </Position>
       <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="114" Column="3" TopLine="112"/>
+        <Filename Value="uTToastMessage.pas"/>
+        <Caret Line="188" TopLine="183"/>
       </Position>
     </JumpHistory>
     <RunParams>

@@ -154,7 +154,7 @@ var
   AArray: TArray<string>;
   {$endif}
   AParent: TWinControl;
-  S, AMode, ATitle, AText,tmpstr: string;
+  S, AMode, ATitle, AText,ToastFontNameTmp,tmpstr: string;
   MessageType: tpMode;
   TD,i,j,err:integer;
 begin
@@ -166,9 +166,9 @@ begin
   s:=FMessageList.Strings[0];
   tmpstr:='';
   j:=0;
-  for i:=0 to length(s) do
+  for i:=1 to utf8length(s) do
   begin
-    if (s[i]=';') or (i=length(s)) then
+    if (utf8copy(s,i,1)=';') or (i=utf8length(s)) then
     begin
       inc(j);
       if j=1 then
@@ -177,15 +177,21 @@ begin
         ATitle:= tmpstr;
       if j=3 then
         AText:= tmpstr;
-      if i=length(s) then
+      if j=4 then
+      //if i=length(s) then
       begin
-        val(s[i],td,err);
+        val(tmpstr,td,err);
+        //val(s[i],td,err);
+      end;
+      if j=5 then
+      begin
+        ToastFontNameTmp:= tmpstr+utf8copy(s,i,1);
       end;
       tmpstr:='';
     end
     else
     begin
-      tmpstr:=tmpstr+s[i];
+      tmpstr:=tmpstr+utf8copy(s,i,1);
     end;
   end;
   {$else}
@@ -199,7 +205,7 @@ begin
 
   MessageType := tpMode(StrToInt(AMode));
 
-  Self.Toast(AParent, MessageType, ATitle, AText,TToastDirection(td));
+  Self.Toast(AParent, MessageType, ATitle, AText,TToastDirection(td),ToastFontNameTmp);
 end;
 
 constructor TToastMessage.Create(const Parent : TWinControl);
@@ -581,19 +587,21 @@ procedure TToastMessage.Toast(const Parent: TWinControl;
 var
   hs, tmp: Integer;
 begin
-  Title.Font.Name:=ToastFontName;
-  Text.Font.Name:=ToastFontName;
   if Self.IsShowing then
   begin
     if not Assigned(FMessageList) then
     begin
       FMessageList := TStringList.Create;
     end;
-    FMessageList.AddObject(Ord(MessageType).ToString + ';' + pTitle + ';' + pText+';'+ord(td).ToString, Parent); //push message to queue;2024-5-12
+    FMessageList.AddObject(Ord(MessageType).ToString + ';' + pTitle + ';' + pText+';'+ord(td).ToString+';'+_ToastFontName, Parent); //push message to queue;2024-5-12
     Exit;
   end
-  else   ToastDirection:=td;
-
+  else
+  begin
+    ToastDirection:=td;
+    Title.Font.Name:=_ToastFontName;
+    Text.Font.Name:=_ToastFontName;
+  end;
   //秋风
   //计算宽度
   OldPanelBoxTop:=PanelBox.Top;
@@ -638,8 +646,8 @@ begin
   Self.PanelBox.BringToFront; //Z轴方向放到最顶上； //pcplayer
   Title.Caption := pTitle;
   Text.Caption  := pText;
-  Title.Font.Name:=_ToastFontName;
-  Text.Font.Name:=_ToastFontName;
+  //Title.Font.Name:=_ToastFontName;
+  //Text.Font.Name:=_ToastFontName;
 
   if MessageType = tpSuccess then
   begin
