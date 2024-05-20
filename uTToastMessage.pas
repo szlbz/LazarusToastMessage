@@ -178,10 +178,8 @@ begin
       if j=3 then
         AText:= tmpstr;
       if j=4 then
-      //if i=length(s) then
       begin
         val(tmpstr,td,err);
-        //val(s[i],td,err);
       end;
       if j=5 then
       begin
@@ -601,14 +599,13 @@ begin
     ToastDirection:=td;
     Title.Font.Name:=_ToastFontName;
     Text.Font.Name:=_ToastFontName;
+    OldPanelBoxTop:=PanelBox.Top;
+    PanelBox.Top:=-50;
+    PanelBoxTop:=PanelBox.Top;
   end;
+
   //秋风
   //计算宽度
-  OldPanelBoxTop:=PanelBox.Top;
-  PanelBox.Top:=-50;
-
-  PanelBoxTop:=PanelBox.Top;
-
   PanelBox.Parent := Parent;
   PanelBox.Height := 50;
   PanelBox.Width := 50 + Text.Canvas.TextWidth(pText);
@@ -646,8 +643,6 @@ begin
   Self.PanelBox.BringToFront; //Z轴方向放到最顶上； //pcplayer
   Title.Caption := pTitle;
   Text.Caption  := pText;
-  //Title.Font.Name:=_ToastFontName;
-  //Text.Font.Name:=_ToastFontName;
 
   if MessageType = tpSuccess then
   begin
