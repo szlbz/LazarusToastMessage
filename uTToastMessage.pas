@@ -78,6 +78,7 @@ const
 
 type
     tpMode = (tpSuccess,tpInfo,tpError);
+    //采纳dseligo的建议将显示方向由原来的integer改用枚举类型(https://forum.lazarus.freepascal.org/index.php/topic,67310.0.html)：
     TToastDirection = (tdTopLeft, tdTopCenter, tdTopRight, tdBottomLeft, tdBottomCenter, tdBottomRight);
 
 type
