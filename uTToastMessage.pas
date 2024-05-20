@@ -133,7 +133,7 @@ type
     class var FToastMessage: TToastMessage;
     class var FMessageList: TStringList;
   public
-    procedure Toast(const MessageType : tpMode; pTitle, pText : string;TD:TToastDirection;_ToastFontName:string = ToastFontName); overload;
+    procedure Toast(const MessageType : tpMode; pTitle, pText : string); overload;
     procedure Toast(const Parent: TWinControl; const MessageType : tpMode; pTitle, pText : string;TD:TToastDirection;_ToastFontName:string = ToastFontName); overload;
 
     constructor Create(const Parent : TWinControl); overload;
@@ -625,7 +625,7 @@ begin
   ToastHeith:=(Self.PanelBox.Parent as TForm).Height;
 
   Self.SetParent(Parent);
-  Self.Toast(MessageType, pTitle, pText,td,_ToastFontName);
+  Self.Toast(MessageType, pTitle, pText);
 end;
 
 class procedure TToastMessage.ToastIt(const Parent : TWinControl; const MessageType: tpMode; pTitle,
@@ -639,7 +639,7 @@ begin
   FToastMessage.Toast(Parent, MessageType, pTitle, pText,td,_ToastFontName);
 end;
 
-procedure TToastMessage.Toast(const MessageType : tpMode; pTitle, pText : string;TD:TToastDirection;_ToastFontName:string=ToastFontName);
+procedure TToastMessage.Toast(const MessageType : tpMode; pTitle, pText : string);
 begin
   Self.PanelBox.BringToFront; //Z轴方向放到最顶上； //pcplayer
   Title.Caption := pTitle;
